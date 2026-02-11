@@ -2,11 +2,18 @@
 #define SELLORDER_H
 
 #include "Order.h"
+using namespace std;
 
 class SellOrder : public Order {
+private:
+    int sellOrderCount;
+
 public:
-    SellOrder(const std::string& sym, int q, double p);
+    SellOrder(string sym, int q, double p);
+    ~SellOrder();
+
     bool execute(User& user, Stock& stock) override;
+    void displayDetails() const override;
 };
 
-#endif // SELLORDER_H
+#endif

@@ -1,13 +1,24 @@
 #include "../include/BuyOrder.h"
-#include <iostream>
 
-BuyOrder::BuyOrder(const std::string& sym, int q, double p) : Order(sym, q, p) {}
+BuyOrder::BuyOrder(string sym, int q, double p) : Order(sym, q, p) {
+    buyOrderCount = 0;
+}
+
+BuyOrder::~BuyOrder() {
+    cout << "Buy Order deleted\n";
+}
 
 bool BuyOrder::execute(User& user, Stock& stock) {
-    // Very simple execution: check stock symbol match (optional) and delegate to user
-    if (!stock.symbol.empty() && stock.symbol != symbol) {
-        std::cout << "Stock symbol mismatch.\n";
-        return false;
+    if (stock.symbol == symbol && stock.available >= quantity) {
+        user.buyStock(symbol, quantity, price);
+        stock.available -= quantity;
+        buyOrderCount++;
+        return true;
     }
-    return user.buyStock(symbol, price, quantity);
+    return false;
+}
+
+void BuyOrder::displayDetails() const {
+    cout << "BUY ORDER - Symbol: " << symbol << ", Qty: " << quantity 
+         << ", Price: " << price << "\n";
 }

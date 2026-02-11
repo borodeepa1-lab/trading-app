@@ -1,24 +1,46 @@
 #ifndef USER_H
 #define USER_H
 
+#include <iostream>
 #include <string>
-#include <map>
+#include <vector>
+using namespace std;
+
+enum TransactionType { BUY, SELL, DEPOSIT };
+
+struct Transaction {
+    TransactionType type;
+    string symbol;
+    int quantity;
+    double amount;
+};
 
 class User {
 private:
-    std::string name;
+    string name;
     double balance;
-    std::map<std::string,int> portfolio; // symbol -> quantity
+    vector<string> stocks;
+    static int totalUsers;
+
+    void recordTransaction(string symbol, int qty, double amount);
 
 public:
     User();
-    void createAccount(const std::string& userName);
+    User(string userName, double initialBalance);
+    ~User();
+
     void addBalance(double amount);
-    bool buyStock(const std::string& symbol, double price, int quantity);
-    bool sellStock(const std::string& symbol, double price, int quantity);
+    bool buyStock(string symbol, int quantity, double price);
+    bool sellStock(string symbol, int quantity, double price);
     void viewPortfolio() const;
-    const std::string& getName() const;
+    
+    string getName() const;
     double getBalance() const;
+    
+    static int getTotalUsers();
+    static void displayStats();
+    
+    friend ostream& operator<<(ostream& os, const User& u);
 };
 
-#endif // USER_H
+#endif
