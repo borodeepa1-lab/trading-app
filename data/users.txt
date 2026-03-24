@@ -1,0 +1,2 @@
+Shirish|100|
+Rahul|10000|

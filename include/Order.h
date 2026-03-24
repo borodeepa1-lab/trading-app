@@ -20,6 +20,13 @@ public:
     virtual bool execute(User& user, Stock& stock) = 0;
     virtual void displayDetails() const;
 
+    // Simple operators: compare by price then symbol, equality by all fields
+    bool operator<(Order const& other) const noexcept;
+    bool operator==(Order const& other) const noexcept;
+
+    // Printing helper
+    friend ostream& operator<<(ostream& os, const Order& o);
+
     string getSymbol() const { return symbol; }
     int getQuantity() const { return quantity; }
     double getPrice() const { return price; }

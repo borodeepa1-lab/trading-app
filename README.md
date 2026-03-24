@@ -951,3 +951,31 @@ if (t.type == SELL) {
 | 30 | Virtual Function | C++ | Order.h | Function overriding |
 | 31 | Friend Function | C++ | User.h | Access private members |
 
+---
+
+## 🛡️ Exception Handling (5 Common Types)
+
+Below are the **5 exception categories** added to the project, with where/how they are used in `main.cpp`.
+
+1. **Arithmetic errors** (`overflow_error`)
+   - Used in `readDouble()` when input is not a finite number (e.g., `inf`, `nan`, overflow).
+   - Helps catch invalid numeric input early.
+
+2. **Null pointer / runtime errors** (`runtime_error`)
+   - Used in `getUserAt()` and `getStockAt()` when an expected pointer is `nullptr`.
+   - Ensures the program never dereferences a null pointer.
+
+3. **Logical runtime errors** (`logic_error`)
+   - Used for invalid business logic (e.g., negative balance, non-positive quantity).
+   - Raised in functions like `createUser()`, `buyStocks()`, `sellStocks()`, and `addBalance()`.
+
+4. **Array index out of bounds** (`out_of_range`)
+   - Used in `getUserAt()` and `getStockAt()` when a user selects an invalid list index.
+   - Prevents invalid access to `users` or `stocks` vectors.
+
+5. **File handling errors** (`ios_base::failure`)
+   - Used in all file I/O functions (`loadStocksFromFile()`, `saveUsersToFile()`, etc.) when files cannot be opened.
+   - Allows the program to handle missing files gracefully.
+
+These exceptions are **caught centrally** in `main()` so the program can report errors and continue running safely.
+

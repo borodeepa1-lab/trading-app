@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 enum TransactionType { BUY, SELL, DEPOSIT };
@@ -19,7 +20,7 @@ class User {
 private:
     string name;
     double balance;
-    vector<string> stocks;
+    vector<pair<string, int>> stocks;  // symbol and quantity pairs
     static int totalUsers;
 
     void recordTransaction(string symbol, int qty, double amount);
@@ -36,10 +37,18 @@ public:
     
     string getName() const;
     double getBalance() const;
+    vector<pair<string, int>>& getStocks();
     
     static int getTotalUsers();
     static void displayStats();
     
+    // File I/O methods
+    void saveToFile(ofstream& file) const;
+    static User loadFromFile(string line);
+    
+    // Adjust balance easily
+    User& operator+=(double amount) noexcept;
+
     friend ostream& operator<<(ostream& os, const User& u);
 };
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 struct Stock {
@@ -22,6 +23,17 @@ struct Stock {
 
     static int totalStocks;
     static void showTotalStocks();
+    
+    // File I/O methods
+    void saveToFile(ofstream& file) const;
+    static Stock loadFromFile(string line);
+
+    // Simple operators for sorting and equality (by symbol)
+    bool operator<(const Stock& other) const noexcept { return symbol < other.symbol; }
+    bool operator==(const Stock& other) const noexcept { return symbol == other.symbol; }
+
+    // Printing
+    friend ostream& operator<<(ostream& os, const Stock& s);
 };
 
 #endif
