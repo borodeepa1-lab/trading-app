@@ -5,11 +5,11 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
-using namespace std;
 #include "include/User.h"
 #include "include/Stock.h"
 #include "include/BuyOrder.h"
 #include "include/SellOrder.h"
+using namespace std;
 
 vector<User*> users;
 vector<Stock*> stocks;
