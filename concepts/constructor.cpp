@@ -4,10 +4,19 @@
 #include <stdexcept>
 #include <limits>
 
-// ================== CONCEPT: CONSTRUCTOR ==================
-// Constructor is a special function:
-// - Same name as class
-// - Called automatically when object is created
+/*
+=========== CONSTRUCTOR ===========
+
+Constructor = special function
+- Same name as class
+- Called automatically when object is created
+
+Types used here:
+- Default constructor → User()
+- Parameterized constructor → User(name, balance)
+
+==================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -16,11 +25,11 @@
 
 using namespace std;
 
+// storing objects
 vector<User*> users;
 vector<Stock*> stocks;
 
-// ---------------- Helper ----------------
-
+// input helper
 int readInt(const string& msg) {
     cout << msg;
     int x;
@@ -28,42 +37,36 @@ int readInt(const string& msg) {
     return x;
 }
 
-// ---------------- CONSTRUCTOR DEMO ----------------
+// ----------- CONSTRUCTOR DEMO -----------
 
 void constructorDemo() {
 
-    // ================== DEFAULT CONSTRUCTOR ==================
-    // No arguments passed
-    User u1;
-    Stock s1;
+    User u1; // default constructor called
+    Stock s1; // default constructor
 
-    cout << "\nDefault Constructor Called:\n";
+    cout << "\nDefault Constructor:\n";
     cout << u1.getName() << " - " << u1.getBalance() << endl;
     s1.display();
 
-    // ================== PARAMETERIZED CONSTRUCTOR ==================
-    // Passing values while creating object
-    User u2("Rahul", 5000);
+    User u2("Rahul", 5000); // parameterized constructor
     Stock s2("AAPL", 150, 100);
 
-    cout << "\nParameterized Constructor Called:\n";
+    cout << "\nParameterized Constructor:\n";
     cout << u2.getName() << " - " << u2.getBalance() << endl;
     s2.display();
 
-    // ================== DYNAMIC OBJECT CREATION ==================
-    // Constructor called using new keyword
-    User* u3 = new User("Amit", 7000);
+    User* u3 = new User("Amit", 7000); // dynamic constructor call
     Stock* s3 = new Stock("GOOGL", 2800, 50);
 
-    cout << "\nDynamic Object (Constructor called):\n";
+    cout << "\nDynamic Object:\n";
     cout << u3->getName() << " - " << u3->getBalance() << endl;
     s3->display();
 
-    delete u3;
+    delete u3; // free memory
     delete s3;
 }
 
-// ---------------- Existing Flow ----------------
+// ----------- NORMAL FLOW -----------
 
 void createUser() {
     string name;
@@ -75,25 +78,22 @@ void createUser() {
     cout << "Enter balance: ";
     cin >> balance;
 
-    // Constructor automatically called
-    User* u = new User(name, balance);
-
+    User* u = new User(name, balance); // constructor called
     users.push_back(u);
 }
 
 void createStocks() {
-    // Constructor automatically called
-    stocks.push_back(new Stock("AAPL", 150, 100));
+    stocks.push_back(new Stock("AAPL", 150, 100)); // constructor
     stocks.push_back(new Stock("MSFT", 350, 50));
 }
 
 void displayStocks() {
     for (int i = 0; i < stocks.size(); i++) {
-        stocks[i]->display();
+        stocks[i]->display(); // object function call
     }
 }
 
-// ---------------- Menu ----------------
+// ----------- MENU -----------
 
 void menu() {
     cout << "\n1. Constructor Demo\n";
@@ -102,11 +102,11 @@ void menu() {
     cout << "4. Exit\n";
 }
 
-// ---------------- Main ----------------
+// ----------- MAIN -----------
 
 int main() {
 
-    createStocks();
+    createStocks(); // create initial stock objects
 
     int choice;
 

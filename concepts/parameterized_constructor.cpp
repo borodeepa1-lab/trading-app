@@ -3,8 +3,17 @@
 #include <fstream>
 #include <stdexcept>
 
-// ================== CONCEPT: PARAMETERIZED CONSTRUCTOR ==================
-// Constructor that takes arguments to initialize object
+/*
+====== PARAMETERIZED CONSTRUCTOR ======
+
+Constructor with arguments
+Used to initialize object with values
+
+Example:
+User("Rahul", 5000)
+
+======================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -13,45 +22,40 @@
 
 using namespace std;
 
+// storing objects
 vector<User*> users;
 vector<Stock*> stocks;
 
-// ---------------- DEMO FUNCTION ----------------
+// ----------- DEMO -----------
 
 void parameterizedDemo() {
 
-    // ================== USING PARAMETERIZED CONSTRUCTOR ==================
-
-    // Passing values directly
-    User u1("Rahul", 5000);
+    User u1("Rahul", 5000); // parameterized constructor
     User u2("Amit", 8000);
 
-    Stock s1("AAPL", 150, 100);
+    Stock s1("AAPL", 150, 100); // constructor with values
     Stock s2("GOOGL", 2800, 50);
 
-    cout << "\nUsers Created:\n";
+    cout << "\nUsers:\n";
     cout << u1.getName() << " - " << u1.getBalance() << endl;
     cout << u2.getName() << " - " << u2.getBalance() << endl;
 
-    cout << "\nStocks Created:\n";
-    s1.display();
+    cout << "\nStocks:\n";
+    s1.display(); // display object data
     s2.display();
 
-    // ================== DYNAMIC CREATION ==================
-    // Constructor called using new
-
-    User* u3 = new User("Neha", 6000);
+    User* u3 = new User("Neha", 6000); // dynamic constructor
     Stock* s3 = new Stock("MSFT", 350, 75);
 
     cout << "\nDynamic Objects:\n";
     cout << u3->getName() << " - " << u3->getBalance() << endl;
     s3->display();
 
-    delete u3;
+    delete u3; // free memory
     delete s3;
 }
 
-// ---------------- NORMAL FLOW ----------------
+// ----------- NORMAL FLOW -----------
 
 void createUser() {
     string name;
@@ -63,38 +67,35 @@ void createUser() {
     cout << "Enter balance: ";
     cin >> balance;
 
-    // PARAMETERIZED CONSTRUCTOR USED HERE
-    User* u = new User(name, balance);
-
+    User* u = new User(name, balance); // constructor used
     users.push_back(u);
 }
 
 void createStocks() {
-    // PARAMETERIZED CONSTRUCTOR
-    stocks.push_back(new Stock("AAPL", 150, 100));
+    stocks.push_back(new Stock("AAPL", 150, 100)); // constructor
     stocks.push_back(new Stock("TESLA", 900, 40));
 }
 
 void displayStocks() {
     for (int i = 0; i < stocks.size(); i++) {
-        stocks[i]->display();
+        stocks[i]->display(); // calling function
     }
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Parameterized Constructor Demo\n";
+    cout << "\n1. Parameterized Demo\n";
     cout << "2. Create User\n";
     cout << "3. Show Stocks\n";
     cout << "4. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
-    createStocks();
+    createStocks(); // initialize objects
 
     int choice;
 

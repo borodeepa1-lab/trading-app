@@ -1,9 +1,15 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: INLINE FUNCTION ==================
-// Inline function replaces function call with actual code
-// Improves performance for small functions
+/*
+=========== INLINE FUNCTION ===========
+
+inline → function code is replaced at call place
+
+Used for small functions to improve speed
+
+======================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -12,64 +18,63 @@
 
 using namespace std;
 
-// ================== INLINE FUNCTIONS ==================
+// ----------- INLINE FUNCTIONS -----------
 
-// Small calculation → good for inline
+// small function → good for inline
 inline double calculateTotal(double price, int qty) {
-    return price * qty;
+    return price * qty; // simple calculation
 }
 
-// Another inline example
+// another inline example
 inline double applyDiscount(double amount) {
-    return amount * 0.9;  // 10% discount
+    return amount * 0.9; // 10% discount
 }
 
-// ---------------- DEMO ----------------
+// ----------- DEMO -----------
 
 void inlineDemo() {
 
     double price = 150;
     int qty = 5;
 
-    double total = calculateTotal(price, qty);
+    double total = calculateTotal(price, qty); // inline used
 
-    cout << "\nTotal Cost: " << total << endl;
+    cout << "\nTotal: " << total << endl;
 
-    double discounted = applyDiscount(total);
+    double discounted = applyDiscount(total); // inline used
 
     cout << "After Discount: " << discounted << endl;
 }
 
-// ---------------- REAL PROJECT USAGE ----------------
+// ----------- PROJECT STYLE -----------
 
-void tradingInlineDemo() {
+void tradingDemo() {
 
     User u("Rahul", 10000);
     Stock s("AAPL", 150, 100);
 
     int qty = 3;
 
-    // INLINE function used instead of manual multiplication
-    double total = calculateTotal(s.price, qty);
+    double total = calculateTotal(s.price, qty); // inline used
 
-    cout << "\nBuying cost: " << total << endl;
+    cout << "\nBuying Cost: " << total << endl;
 
     BuyOrder order("AAPL", qty, s.price);
 
     order.execute(u, s);
 
-    cout << "Remaining Balance: " << u.getBalance() << endl;
+    cout << "Balance: " << u.getBalance() << endl;
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Inline Function Demo\n";
-    cout << "2. Trading Inline Demo\n";
+    cout << "\n1. Inline Demo\n";
+    cout << "2. Trading Demo\n";
     cout << "3. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -82,7 +87,7 @@ int main() {
 
         switch (choice) {
             case 1: inlineDemo(); break;
-            case 2: tradingInlineDemo(); break;
+            case 2: tradingDemo(); break;
             case 3: return 0;
             default: cout << "Invalid\n";
         }

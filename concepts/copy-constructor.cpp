@@ -3,8 +3,18 @@
 #include <fstream>
 #include <stdexcept>
 
-// ================== CONCEPT: COPY CONSTRUCTOR ==================
-// Copy constructor creates a new object from an existing object
+/*
+=========== COPY CONSTRUCTOR ===========
+
+Used to create a new object from an existing object
+
+Example:
+User u2 = u1;  // copy happens
+
+Both objects have same values but are different
+
+=======================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -16,72 +26,61 @@ using namespace std;
 vector<User*> users;
 vector<Stock*> stocks;
 
-// ---------------- COPY DEMO ----------------
+// ----------- DEMO -----------
 
 void copyDemo() {
 
-    // ================== ORIGINAL OBJECT ==================
-    User u1("Rahul", 5000);
+    User u1("Rahul", 5000); // original object
 
-    cout << "\nOriginal Object:\n";
+    cout << "\nOriginal:\n";
     cout << u1.getName() << " - " << u1.getBalance() << endl;
 
-    // ================== COPY OBJECT ==================
-    // Copy constructor is called here
-    User u2 = u1;
+    User u2 = u1; // copy constructor called
 
-    cout << "\nCopied Object:\n";
+    cout << "\nCopied:\n";
     cout << u2.getName() << " - " << u2.getBalance() << endl;
 
-    // Modify copy
-    u2.addBalance(2000);
+    u2.addBalance(2000); // modify copy
 
-    cout << "\nAfter modifying copied object:\n";
+    cout << "\nAfter Change:\n";
     cout << "Original: " << u1.getBalance() << endl;
     cout << "Copy: " << u2.getBalance() << endl;
-
-    // ================== STOCK COPY ==================
-    Stock s1("AAPL", 150, 100);
-
-    // Copy constructor
-    Stock s2 = s1;
-
-    cout << "\nStock Copy:\n";
-    s2.display();
 }
 
-// ---------------- FILE COPY CASE ----------------
+// ----------- FILE COPY CASE -----------
 
 void fileCopyDemo() {
-    ifstream file("../data/stocks.txt");
+
+    ifstream file("../data/stocks.txt"); // open file
     string line;
 
     while (getline(file, line)) {
+
         if (!line.empty()) {
 
-            // Object created
-            Stock s = Stock::loadFromFile(line);
+            Stock s = Stock::loadFromFile(line); // object created
 
-            // COPY CONSTRUCTOR CALLED HERE
-            stocks.push_back(new Stock(s));
+            stocks.push_back(new Stock(s)); 
+            // copy constructor used here
         }
     }
 
-    cout << "\nStocks loaded using copy constructor:\n";
+    cout << "\nStocks Loaded:\n";
+
     for (int i = 0; i < stocks.size(); i++) {
-        stocks[i]->display();
+        stocks[i]->display(); // display copied objects
     }
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Copy Constructor Demo\n";
+    cout << "\n1. Copy Demo\n";
     cout << "2. File Copy Demo\n";
     cout << "3. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 

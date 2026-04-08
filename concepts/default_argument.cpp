@@ -1,8 +1,15 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: DEFAULT ARGUMENTS ==================
-// If value is not passed → default value is used
+/*
+=========== DEFAULT ARGUMENTS ===========
+
+Default values given to function parameters
+
+If value not passed → default is used
+
+========================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -11,16 +18,16 @@
 
 using namespace std;
 
-// ---------------- DEFAULT ARGUMENT FUNCTIONS ----------------
+// ----------- FUNCTIONS WITH DEFAULT VALUES -----------
 
-// Default name + balance
+// default name and balance
 void createUser(string name = "Guest", double balance = 1000) {
-    User* u = new User(name, balance);
-    cout << "User Created: " << u->getName() << " - " << u->getBalance() << endl;
+    User* u = new User(name, balance); // constructor
+    cout << "User: " << u->getName() << " - " << u->getBalance() << endl;
     delete u;
 }
 
-// Default quantity
+// default quantity
 void buyStock(User& user, Stock& stock, int qty = 1) {
 
     BuyOrder order(stock.symbol, qty, stock.price);
@@ -32,42 +39,38 @@ void buyStock(User& user, Stock& stock, int qty = 1) {
     }
 }
 
-// ---------------- DEMO ----------------
+// ----------- DEMO -----------
 
 void defaultDemo() {
 
-    cout << "\n--- Using Default Values ---\n";
+    cout << "\nUsing Default Values:\n";
 
-    // No arguments → default used
-    createUser();
+    createUser(); // default values used
 
     User u("Rahul", 5000);
     Stock s("AAPL", 150, 100);
 
-    // qty default = 1
-    buyStock(u, s);
+    buyStock(u, s); // qty = 1 (default)
 
-    cout << "\nBalance after default buy: " << u.getBalance() << endl;
+    cout << "Balance: " << u.getBalance() << endl;
 
-    cout << "\n--- Overriding Default Values ---\n";
+    cout << "\nCustom Values:\n";
 
-    // Custom values
-    createUser("Amit", 8000);
+    createUser("Amit", 8000); // override default
 
-    // custom qty
-    buyStock(u, s, 3);
+    buyStock(u, s, 3); // custom quantity
 
-    cout << "Balance after custom buy: " << u.getBalance() << endl;
+    cout << "Balance: " << u.getBalance() << endl;
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
     cout << "\n1. Default Argument Demo\n";
     cout << "2. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 

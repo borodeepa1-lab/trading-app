@@ -1,9 +1,16 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: CALL BY REFERENCE ==================
-// Using '&' we pass original object (no copy)
-// Changes affect original object
+/*
+=========== CALL BY REFERENCE ===========
+
+Call by value → copy passed (no change in original)
+Call by reference → original passed (changes affect original)
+
+& → reference symbol
+
+========================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -12,71 +19,67 @@
 
 using namespace std;
 
-// ---------------- DEMO FUNCTION ----------------
+// ----------- VALUE vs REFERENCE -----------
 
-// Call by VALUE (copy)
+// copy passed
 void valueDemo(User u) {
-    u.addBalance(1000);
+    u.addBalance(1000); // change only in copy
 }
 
-// Call by REFERENCE
+// original passed
 void referenceDemo(User& u) {
-    u.addBalance(1000);
+    u.addBalance(1000); // change in original
 }
 
-// Return by REFERENCE
+// returning reference
 User& returnReference(User& u) {
-    return u;
+    return u; // returning same object
 }
 
-// ---------------- MAIN DEMO ----------------
+// ----------- DEMO -----------
 
-void callByReferenceDemo() {
+void callDemo() {
 
-    User u("Rahul", 5000);
+    User u("Rahul", 5000); // object
 
-    cout << "\nOriginal Balance: " << u.getBalance() << endl;
+    cout << "\nOriginal: " << u.getBalance() << endl;
 
-    // ================== CALL BY VALUE ==================
-    valueDemo(u);
-    cout << "After Call by VALUE: " << u.getBalance() << endl;
+    valueDemo(u); // no change in original
+    cout << "After Value: " << u.getBalance() << endl;
 
-    // ================== CALL BY REFERENCE ==================
-    referenceDemo(u);
-    cout << "After Call by REFERENCE: " << u.getBalance() << endl;
+    referenceDemo(u); // original modified
+    cout << "After Reference: " << u.getBalance() << endl;
 
-    // ================== RETURN BY REFERENCE ==================
-    returnReference(u).addBalance(2000);
-
-    cout << "After Return by REFERENCE: " << u.getBalance() << endl;
+    returnReference(u).addBalance(2000); // chaining
+    cout << "After Return Reference: " << u.getBalance() << endl;
 }
 
-// ---------------- REAL PROJECT USAGE ----------------
+// ----------- PROJECT USE -----------
 
 void tradingDemo() {
 
     User u("Amit", 10000);
     Stock s("AAPL", 150, 100);
 
-    // execute() uses reference
     BuyOrder order("AAPL", 5, 150);
 
-    order.execute(u, s);  // NO COPY, original modified
+    order.execute(u, s); 
+    // reference used → original objects modified
 
     cout << "\nAfter Trade:\n";
     cout << u.getName() << " Balance: " << u.getBalance() << endl;
     cout << "Stock Available: " << s.available << endl;
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Call by Reference Demo\n";
-    cout << "2. Trading Demo (Real Use)\n";
+    cout << "\n1. Call Demo\n";
+    cout << "2. Trading Demo\n";
     cout << "3. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -88,7 +91,7 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-            case 1: callByReferenceDemo(); break;
+            case 1: callDemo(); break;
             case 2: tradingDemo(); break;
             case 3: return 0;
             default: cout << "Invalid\n";

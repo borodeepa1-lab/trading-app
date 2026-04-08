@@ -1,8 +1,18 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: OPERATOR OVERLOADING ==================
-// Redefining operators for user-defined types
+/*
+=========== OPERATOR OVERLOADING ===========
+
+Redefining operators for objects
+
+Types:
+Binary → < , == 
+Unary  → +=
+Friend → <<
+
+===========================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -11,62 +21,54 @@
 
 using namespace std;
 
-// ---------------- BINARY OPERATOR DEMO ----------------
+// ----------- BINARY OPERATOR -----------
 
 void binaryDemo() {
 
     BuyOrder o1("AAPL", 5, 150);
     BuyOrder o2("AAPL", 5, 200);
 
-    cout << "\n--- Binary Operator (<) ---\n";
-
-    if (o1 < o2) {
-        cout << "o1 has lower price than o2\n";
+    if (o1 < o2) { // operator< used
+        cout << "o1 has lower price\n";
     }
 
-    cout << "\n--- Equality Operator (==) ---\n";
-
-    if (o1 == o2) {
-        cout << "Orders are equal\n";
+    if (o1 == o2) { // operator== used
+        cout << "Orders equal\n";
     } else {
-        cout << "Orders are NOT equal\n";
+        cout << "Orders not equal\n";
     }
 }
 
-// ---------------- UNARY / MODIFIER OPERATOR ----------------
+// ----------- UNARY / MODIFIER -----------
 
 void unaryDemo() {
 
     User u("Rahul", 5000);
 
-    cout << "\nOriginal Balance: " << u.getBalance() << endl;
+    cout << "\nBalance: " << u.getBalance() << endl;
 
-    // Using overloaded += operator
-    u += 2000;
+    u += 2000; // operator+= used
 
-    cout << "After += operator: " << u.getBalance() << endl;
+    cout << "After += : " << u.getBalance() << endl;
 }
 
-// ---------------- FRIEND OPERATOR ----------------
+// ----------- FRIEND OPERATOR -----------
 
-void friendOperatorDemo() {
+void friendDemo() {
 
     BuyOrder order("AAPL", 3, 150);
 
-    cout << "\n--- Friend Operator (<<) ---\n";
+    cout << "\nOrder:\n";
 
-    // Calls friend function
-    cout << order << endl;
+    cout << order << endl; // operator<< used
 }
 
-// ---------------- REAL TRADING COMPARISON ----------------
+// ----------- TRADING COMPARISON -----------
 
-void tradingComparisonDemo() {
+void tradingDemo() {
 
     BuyOrder o1("AAPL", 5, 150);
     BuyOrder o2("AAPL", 5, 120);
-
-    cout << "\nComparing Orders:\n";
 
     if (o1 < o2) {
         cout << "o1 cheaper\n";
@@ -75,17 +77,17 @@ void tradingComparisonDemo() {
     }
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Binary Operator Demo\n";
-    cout << "2. Unary Operator Demo\n";
-    cout << "3. Friend Operator Demo\n";
-    cout << "4. Trading Comparison\n";
+    cout << "\n1. Binary Demo\n";
+    cout << "2. Unary Demo\n";
+    cout << "3. Friend Demo\n";
+    cout << "4. Trading Demo\n";
     cout << "5. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -99,8 +101,8 @@ int main() {
         switch (choice) {
             case 1: binaryDemo(); break;
             case 2: unaryDemo(); break;
-            case 3: friendOperatorDemo(); break;
-            case 4: tradingComparisonDemo(); break;
+            case 3: friendDemo(); break;
+            case 4: tradingDemo(); break;
             case 5: return 0;
             default: cout << "Invalid\n";
         }

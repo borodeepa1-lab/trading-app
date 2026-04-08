@@ -1,9 +1,16 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: DYNAMIC MEMORY ALLOCATION ==================
-// Using 'new' to allocate memory on heap
-// Using 'delete' to free memory
+/*
+=========== DYNAMIC ALLOCATION ===========
+
+new    → allocate memory
+delete → free memory
+
+Used when size is not fixed (runtime)
+
+=========================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -11,69 +18,63 @@
 
 using namespace std;
 
-// ---------------- BASIC DEMO ----------------
+// ----------- BASIC DEMO -----------
 
 void basicDemo() {
 
-    // Dynamic allocation
-    User* u = new User("Rahul", 5000);
+    User* u = new User("Rahul", 5000); // dynamic object
 
-    cout << "\nUser Created:\n";
+    cout << "\nUser:\n";
     cout << u->getName() << " - " << u->getBalance() << endl;
 
-    // Free memory
-    delete u;
-
-    cout << "Memory deleted\n";
+    delete u; // free memory
 }
 
-// ---------------- ARRAY DYNAMIC ----------------
+// ----------- ARRAY DEMO -----------
 
 void arrayDemo() {
 
     int n = 3;
 
-    // Dynamic array of objects
-    User* users = new User[n];
+    User* users = new User[n]; // dynamic array
 
-    cout << "\nDynamic Array Created\n";
-
-    // Assign values
     users[0] = User("Amit", 5000);
     users[1] = User("Neha", 7000);
     users[2] = User("Raj", 6000);
+
+    cout << "\nDynamic Array:\n";
 
     for (int i = 0; i < n; i++) {
         cout << users[i].getName() << " - "
              << users[i].getBalance() << endl;
     }
 
-    delete[] users;
+    delete[] users; // free array
 }
 
-// ---------------- PROJECT STYLE ----------------
+// ----------- PROJECT STYLE -----------
 
-void projectStyleDemo() {
+void projectDemo() {
 
     vector<User*> users;
 
     users.push_back(new User("Rahul", 5000));
     users.push_back(new User("Amit", 7000));
 
-    cout << "\n--- Users ---\n";
+    cout << "\nUsers:\n";
 
     for (int i = 0; i < users.size(); i++) {
         cout << users[i]->getName() << " - "
              << users[i]->getBalance() << endl;
     }
 
-    // Clean memory
+    // free memory
     for (int i = 0; i < users.size(); i++) {
         delete users[i];
     }
 }
 
-// ---------------- TRADING DEMO ----------------
+// ----------- TRADING DEMO -----------
 
 void tradingDemo() {
 
@@ -82,28 +83,27 @@ void tradingDemo() {
 
     BuyOrder* order = new BuyOrder("AAPL", 3, 150);
 
-    order->execute(*u, *s);
+    order->execute(*u, *s); // reference use
 
     cout << "\nAfter Trade:\n";
     cout << u->getName() << " Balance: " << u->getBalance() << endl;
 
-    // Free memory
     delete u;
     delete s;
     delete order;
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
     cout << "\n1. Basic Demo\n";
     cout << "2. Array Demo\n";
-    cout << "3. Project Style Demo\n";
+    cout << "3. Project Demo\n";
     cout << "4. Trading Demo\n";
     cout << "5. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -117,7 +117,7 @@ int main() {
         switch (choice) {
             case 1: basicDemo(); break;
             case 2: arrayDemo(); break;
-            case 3: projectStyleDemo(); break;
+            case 3: projectDemo(); break;
             case 4: tradingDemo(); break;
             case 5: return 0;
             default: cout << "Invalid\n";

@@ -1,56 +1,57 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: STATIC MEMBERS ==================
-// Static data -> shared across all objects
-// Static function -> called using class name
+/*
+=========== STATIC MEMBERS ===========
+
+static variable → shared by all objects
+static function → called using class name
+
+Example:
+User::displayStats();
+
+=====================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
 
 using namespace std;
 
-// ---------------- STATIC DEMO ----------------
+// ----------- DEMO -----------
 
 void staticDemo() {
 
-    // ================== CREATING OBJECTS ==================
-    User u1("Rahul", 5000);
-    User u2("Amit", 8000);
-    User u3("Neha", 6000);
+    User u1("Rahul", 5000); // object 1
+    User u2("Amit", 8000);  // object 2
+    User u3("Neha", 6000);  // object 3
 
-    // All these objects share SAME static variable: totalUsers
+    // all objects share same static variable
+    cout << "\nTotal Users: ";
+    cout << User::getTotalUsers() << endl; // static variable access
 
-    cout << "\nTotal Users (static variable): ";
-    cout << User::getTotalUsers() << endl;
-
-    // ================== STATIC FUNCTION ==================
-    cout << "\nUsing static function:\n";
+    // static function call
     User::displayStats();
 
-    // ================== STOCK ==================
     Stock s1("AAPL", 150, 100);
     Stock s2("GOOGL", 2800, 50);
 
-    cout << "\nTotal Stocks (static variable): ";
-    Stock::showTotalStocks();
+    cout << "\nTotal Stocks:\n";
+    Stock::showTotalStocks(); // static function
 }
 
-// ---------------- STATIC OBJECT (EXPLANATION) ----------------
+// ----------- STATIC OBJECT -----------
 
 void staticObjectDemo() {
 
-    // Static object -> created only once
     static User u("PermanentUser", 10000);
+    // created only once
 
     cout << "\nStatic Object:\n";
     cout << u.getName() << " - " << u.getBalance() << endl;
-
-    // Even if function is called multiple times,
-    // object is NOT recreated
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
     cout << "\n1. Static Members Demo\n";
@@ -58,7 +59,7 @@ void menu() {
     cout << "3. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 

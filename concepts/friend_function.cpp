@@ -1,60 +1,89 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: FRIEND FUNCTION ==================
-// Friend function can access private members of a class
-// Declared using 'friend' keyword
+/*
+=========== FRIEND FUNCTION ===========
+
+Friend function:
+- Not a member of class
+- Can access private/protected data
+
+In this program:
+- We use friend function with << operator
+- It allows printing object using: cout << object
+
+======================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
 #include "../include/Order.h"
+#include "../include/BuyOrder.h"
 
 using namespace std;
 
-// ---------------- DEMO ----------------
+// ----------- DEMO -----------
 
 void friendDemo() {
 
-    User u("Rahul", 5000);
-    Stock s("AAPL", 150, 100);
+    User u("Rahul", 5000);   // object of User
+    Stock s("AAPL", 150, 100); // object of Stock
 
-    cout << "\n--- Using Friend Function ---\n";
+    /*
+    ================= HOW FRIEND FUNCTION IS USED =================
 
-    // operator<< is a FRIEND FUNCTION
-    cout << u;   // accesses private members
-    cout << s;   // accesses private members (via friend operator)
+    cout << u;
 
-    // Order example
-    Order* o = nullptr;
+     This does NOT directly print u
+     It calls overloaded function:
 
-    // Cannot create Order directly (abstract class)
-    // But we show concept using derived class
+       operator<<(cout, u)
+
+     This function is declared as FRIEND inside class
+
+     Because of friend:
+       It can access private data like:
+       - name
+       - balance
+
+     Without friend:
+       u.name is not allowed
+
+     With friend:
+       u.name is allowed
+
+    ==============================================================
+    */
+
+    cout << "\nUser Details:\n";
+    cout << u;   // friend function used here
+
+    cout << "\nStock Details:\n";
+    cout << s;   // friend function used here
+
+    /*
+    ----------- WITH ORDER -----------
+
+    Order class has protected members:
+    symbol, quantity, price
+
+    Friend function accesses them directly
+    */
+
     BuyOrder b("AAPL", 2, 150);
 
     cout << "\nOrder Details:\n";
-    cout << b;   // friend function used
-
+    cout << b;   // friend function prints order
 }
 
-// ---------------- WHY FRIEND FUNCTION ----------------
-
-void explanation() {
-
-    cout << "\nWhy Friend Function?\n";
-    cout << "1. Access private data safely\n";
-    cout << "2. Used in operator overloading\n";
-    cout << "3. Keeps encapsulation controlled\n";
-}
-
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
     cout << "\n1. Friend Function Demo\n";
-    cout << "2. Explanation\n";
-    cout << "3. Exit\n";
+    cout << "2. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -67,8 +96,7 @@ int main() {
 
         switch (choice) {
             case 1: friendDemo(); break;
-            case 2: explanation(); break;
-            case 3: return 0;
+            case 2: return 0;
             default: cout << "Invalid\n";
         }
     }

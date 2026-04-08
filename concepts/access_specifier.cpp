@@ -4,10 +4,20 @@
 #include <stdexcept>
 #include <limits>
 
-// ================== CONCEPT: ACCESS SPECIFIERS ==================
-// public    -> accessible everywhere
-// private   -> accessible only inside class
-// protected -> accessible in derived classes
+/*
+================= ACCESS SPECIFIERS =================
+
+private   → only inside class
+public    → accessible everywhere
+protected → accessible in derived class
+
+Used here:
+- User → private data (name, balance)
+- Public functions → access private data
+- Order → protected members used in child classes
+
+====================================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -16,20 +26,16 @@
 
 using namespace std;
 
-// ================== OBJECT STORAGE ==================
-vector<User*> users;
-vector<Stock*> stocks;
+vector<User*> users;   // storing User objects
+vector<Stock*> stocks; // storing Stock objects
 
-// ---------------- Helper ----------------
-
+// input helper
 int readInt(const string& msg) {
     cout << msg;
     int x;
     cin >> x;
     return x;
 }
-
-// ---------------- Core ----------------
 
 void createUser() {
     string name;
@@ -41,51 +47,40 @@ void createUser() {
     cout << "Enter balance: ";
     cin >> balance;
 
-    // PUBLIC constructor is accessible
-    User* u = new User(name, balance);
-
+    User* u = new User(name, balance); // public constructor
     users.push_back(u);
 }
 
-// ================== ACCESS SPECIFIER DEMO ==================
-
 void accessDemo() {
-    User u("Rahul", 5000);
 
-    // ❌ NOT ALLOWED (private members)
-    // u.name = "ABC";        // ERROR
-    // u.balance = 1000;     // ERROR
+    User u("Rahul", 5000); // object
 
-    // ✅ Allowed (public methods)
+    // ❌ private (not allowed)
+    // u.name
+    // u.balance
+
+    // ✅ public (allowed)
     cout << u.getName() << endl;
     cout << u.getBalance() << endl;
 
-    u.addBalance(1000);
+    u.addBalance(1000); // modifying private data
 
-    // ================== PROTECTED ==================
-    // symbol, quantity, price in Order are protected
-    // They are accessed inside BuyOrder / SellOrder (derived classes)
-
+    // protected used inside derived class
     Stock s("AAPL", 150, 100);
-
-    // Using derived class (BuyOrder)
     BuyOrder b("AAPL", 2, 150);
 
-    // execute() internally uses protected members
-    b.execute(u, s);
+    b.execute(u, s); // uses protected members internally
 }
 
-// ---------------- Menu ----------------
-
+// menu
 void menu() {
     cout << "\n1. Create User\n";
-    cout << "2. Access Specifier Demo\n";
+    cout << "2. Access Demo\n";
     cout << "3. Exit\n";
 }
 
-// ---------------- Main ----------------
-
 int main() {
+
     int choice;
 
     while (true) {

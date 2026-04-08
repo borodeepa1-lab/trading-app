@@ -1,26 +1,35 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: ARRAY OF OBJECTS ==================
-// Multiple objects stored in array or vector
+/*
+=========== ARRAY OF OBJECTS ===========
+
+Multiple objects stored together
+
+Types:
+1. Static array → fixed size
+2. Vector → dynamic size
+
+=======================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
 
 using namespace std;
 
-// ---------------- STATIC ARRAY ----------------
+// ----------- STATIC ARRAY -----------
 
 void staticArrayDemo() {
 
-    // Array of objects
+    // array of objects
     User users[3] = {
         User("Rahul", 5000),
         User("Amit", 7000),
         User("Neha", 6000)
     };
 
-    cout << "\n--- Static Array of Objects ---\n";
+    cout << "\nStatic Array:\n";
 
     for (int i = 0; i < 3; i++) {
         cout << users[i].getName() << " - "
@@ -28,17 +37,17 @@ void staticArrayDemo() {
     }
 }
 
-// ---------------- VECTOR (DYNAMIC ARRAY) ----------------
+// ----------- VECTOR -----------
 
 void vectorDemo() {
 
-    vector<User> users;
+    vector<User> users; // dynamic array
 
     users.push_back(User("Rahul", 5000));
     users.push_back(User("Amit", 7000));
     users.push_back(User("Neha", 6000));
 
-    cout << "\n--- Vector of Objects ---\n";
+    cout << "\nVector:\n";
 
     for (int i = 0; i < users.size(); i++) {
         cout << users[i].getName() << " - "
@@ -46,39 +55,38 @@ void vectorDemo() {
     }
 }
 
-// ---------------- POINTER ARRAY (PROJECT STYLE) ----------------
+// ----------- POINTER ARRAY -----------
 
 void pointerArrayDemo() {
 
-    vector<User*> users;
+    vector<User*> users; // pointer array
 
-    // Creating objects dynamically
     users.push_back(new User("Rahul", 5000));
     users.push_back(new User("Amit", 7000));
 
-    cout << "\n--- Vector of Object Pointers ---\n";
+    cout << "\nPointer Array:\n";
 
     for (int i = 0; i < users.size(); i++) {
         cout << users[i]->getName() << " - "
              << users[i]->getBalance() << endl;
     }
 
-    // Cleanup
+    // free memory
     for (int i = 0; i < users.size(); i++) {
         delete users[i];
     }
 }
 
-// ---------------- STOCK EXAMPLE ----------------
+// ----------- STOCK EXAMPLE -----------
 
-void stockArrayDemo() {
+void stockDemo() {
 
     vector<Stock*> stocks;
 
     stocks.push_back(new Stock("AAPL", 150, 100));
     stocks.push_back(new Stock("MSFT", 350, 50));
 
-    cout << "\n--- Stock Array ---\n";
+    cout << "\nStocks:\n";
 
     for (int i = 0; i < stocks.size(); i++) {
         stocks[i]->display();
@@ -89,17 +97,17 @@ void stockArrayDemo() {
     }
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Static Array Demo\n";
-    cout << "2. Vector Demo\n";
-    cout << "3. Pointer Array Demo\n";
-    cout << "4. Stock Array Demo\n";
+    cout << "\n1. Static Array\n";
+    cout << "2. Vector\n";
+    cout << "3. Pointer Array\n";
+    cout << "4. Stock Demo\n";
     cout << "5. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
@@ -114,7 +122,7 @@ int main() {
             case 1: staticArrayDemo(); break;
             case 2: vectorDemo(); break;
             case 3: pointerArrayDemo(); break;
-            case 4: stockArrayDemo(); break;
+            case 4: stockDemo(); break;
             case 5: return 0;
             default: cout << "Invalid\n";
         }

@@ -1,8 +1,16 @@
 #include <iostream>
 #include <vector>
 
-// ================== CONCEPT: FUNCTION OVERLOADING ==================
-// Same function name, different parameters
+/*
+=========== FUNCTION OVERLOADING ===========
+
+Same function name
+Different parameters (type or number)
+
+Compiler decides which function to call
+
+===========================================
+*/
 
 #include "../include/User.h"
 #include "../include/Stock.h"
@@ -10,64 +18,64 @@
 
 using namespace std;
 
-// ---------------- FUNCTION OVERLOADING ----------------
+// ----------- OVERLOADED FUNCTIONS -----------
 
-// Add balance (int version)
+// int version
 void addBalance(User& u, int amount) {
-    u.addBalance(amount);
-    cout << "Added (int): " << amount << endl;
+    u.addBalance(amount); // add int amount
+    cout << "Added int: " << amount << endl;
 }
 
-// Add balance (double version)
+// double version
 void addBalance(User& u, double amount) {
-    u.addBalance(amount);
-    cout << "Added (double): " << amount << endl;
+    u.addBalance(amount); // add double amount
+    cout << "Added double: " << amount << endl;
 }
 
-// Buy stock with quantity
+// buy with quantity
 void buyStock(User& u, Stock& s, int qty) {
     BuyOrder order(s.symbol, qty, s.price);
     order.execute(u, s);
-    cout << "Bought with qty: " << qty << endl;
+    cout << "Bought qty: " << qty << endl;
 }
 
-// Buy stock with default quantity = 1
+// buy default 1 share
 void buyStock(User& u, Stock& s) {
     BuyOrder order(s.symbol, 1, s.price);
     order.execute(u, s);
-    cout << "Bought 1 share (default)\n";
+    cout << "Bought 1 share\n";
 }
 
-// ---------------- DEMO ----------------
+// ----------- DEMO -----------
 
 void overloadingDemo() {
 
     User u("Rahul", 10000);
     Stock s("AAPL", 150, 100);
 
-    cout << "\n--- Add Balance Overloading ---\n";
+    cout << "\nBalance Operations:\n";
 
-    addBalance(u, 1000);     // int version
-    addBalance(u, 500.75);   // double version
+    addBalance(u, 1000);     // calls int version
+    addBalance(u, 500.75);   // calls double version
 
     cout << "Balance: " << u.getBalance() << endl;
 
-    cout << "\n--- Buy Stock Overloading ---\n";
+    cout << "\nStock Operations:\n";
 
-    buyStock(u, s);       // default version
-    buyStock(u, s, 3);    // custom qty
+    buyStock(u, s);       // default function
+    buyStock(u, s, 3);    // overloaded version
 
     cout << "Final Balance: " << u.getBalance() << endl;
 }
 
-// ---------------- MENU ----------------
+// ----------- MENU -----------
 
 void menu() {
-    cout << "\n1. Function Overloading Demo\n";
+    cout << "\n1. Overloading Demo\n";
     cout << "2. Exit\n";
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
 
